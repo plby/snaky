@@ -1,4 +1,7 @@
 all: bin/main
 
-bin/main: src/main.cc src/position.hh
-	g++ src/main.cc -o bin/main
+SRC=$(wildcard src/*.cc)
+HEAD=$(wildcard src/*.hh)
+
+bin/main: $(SRC) $(HEAD)
+	g++ $(SRC) -o bin/main
