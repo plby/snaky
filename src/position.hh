@@ -31,12 +31,39 @@
   A shape is a subset of the squares in [MIN_X, MAX_X) x [MIN_Y,
   MAX_Y), represented with a bitset.  Here as everywhere else,
   intervals are half-open.
+
+  The user of this structure is generally responsible for testing that
+  modifications are within bounds.
 */
 const int MIN_X = -3;
 const int MAX_X =  5;
 const int MIN_Y = -3;
 const int MAX_Y =  5;
+const int COL = MAX_Y - MIN_Y;
 const int MAX_SQUARES = (MAX_X - MIN_X) * (MAX_Y - MIN_Y);
 struct shape {
 	std::bitset<MAX_SQUARES> present;
+
+	bool get( const int x, const int y ) const {
+		return present[(x-MIN_X)*COL + (y-MIN_Y)];
+	}
+	shape& set( int x, int y, bool val = true ) {
+		present.set( (x-MIN_X)*COL + (y-MIN_Y), val );
+		return *this;
+	}
+};
+bool in_bounds( const int x, const int y ) {
+	return MIN_X <= x and x < MAX_X and MIN_Y <= y and y < MAX_Y;
+}
+
+/*
+  A "situation" is a collection of relevant squares, some
+  subcollection of which is black stones.
+
+  The user of this structure is generally responsible for insuring
+  that the subcollection property is upheld.
+*/
+struct situation {
+	shape relevant;
+	shape black;
 };
