@@ -56,6 +56,9 @@ inline bool in_bounds( const int x, const int y ) {
 	return MIN_X <= x and x < MAX_X and MIN_Y <= y and y < MAX_Y;
 }
 
+shape reflect_xy( const shape& s );
+shape rotate_xy( const shape& s );
+
 std::vector<shape> rotate_reflect_all( shape s );
 
 /*
