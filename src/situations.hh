@@ -14,4 +14,8 @@ struct situations {
 void add_blacks( situations&s, const std::vector<shape> gs );
 void add_leaf_situation( situations& s, const shape g );
 void add_leaf_situations( situations& s, const std::vector<shape> gs );
+
+/*
+  Test if the search is complete and a winning strategy has been found.
+*/
 bool finished( const situations s );
