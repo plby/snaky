@@ -44,6 +44,13 @@ shape rotate_xy( const shape& s ) {
 	return r;	
 }
 
+/*
+  Return a list of the (up to) 8 rotations and reflections of a given
+  shape.
+
+  We do not deduplicate the results for now because we don't need that
+  optimization.
+*/
 std::vector<shape> rotate_reflect_all( shape s ) {
 	std::vector<shape> result;
 	shape tmp = s;
@@ -54,8 +61,6 @@ std::vector<shape> rotate_reflect_all( shape s ) {
 		}
 		tmp = reflect_xy(tmp);
 	}
-
-//TODO: Deduplicate?
 
 	return result;
 }
