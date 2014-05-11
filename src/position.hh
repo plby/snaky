@@ -71,20 +71,28 @@ inline void verify_in_bounds( const int x, const int y ) {
   this code to even compile.  And it's trivial code.
 */
 namespace std {
-	template <> 
+	template <>
 	struct hash<shape>
 	{
 		std::size_t operator() (const shape& s) const {
 			return std::hash<std::bitset<MAX_SQUARES> >()( s.present );
 		}
 	};
+	template <>
+	struct equal_to<shape>
+	{
+		bool operator() (const shape& s, const shape& t) const {
+			return std::equal_to<std::bitset<MAX_SQUARES> >()( s.present, t.present );
+		}
+	};
 }
 
 /*
-  Basic reflection and rotation.
+  Basic transformations.
 */
 shape reflect_xy( const shape& s );
 shape rotate_xy ( const shape& s );
+shape translate( const shape& s, int dx, int dy );
 
 std::vector<shape> rotate_reflect_all( shape s );
 
@@ -99,3 +107,5 @@ struct situation {
 	shape relevant;
 	shape black;
 };
+
+situation canonical( const situation& s );
