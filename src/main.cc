@@ -15,25 +15,14 @@ shape goal_shape( ) {
 	return goal;
 }
 
-/*
-  Add all of the reflections and rotations to a collection of
-  situations as leaves.
-*/
-void add_rotated_leaves( situations& s, const shape g ) {
-	std::vector<shape> symmetries = rotate_reflect_all( g );
-	for( std::vector<shape>::iterator i = symmetries.begin();
-	     i != symmetries.end();
-	     i++ ) {
-		add_leaf_situation( s, *i );
-	}
-}
-
 void deduce( situations& s );
 int main( ) {
 	situations wins;
 
 	shape goal = goal_shape();
-	add_rotated_leaves( wins, goal );
+	std::vector<shape> goals = rotate_reflect_all( goal );
+	add_blacks( wins, goals );
+	add_leaf_situations( wins, goals );
 	while( not finished(wins) ) {
 		deduce( wins );
 	}
