@@ -7,11 +7,15 @@
 */
 #include <unordered_map>
 struct situations {
-//TODO
 	std::unordered_map<shape, std::vector<situation> > s;
 };
 
+/*
+  Build up the collection of possible black shapes tracked.
+*/
 void add_blacks( situations&s, const std::vector<shape> gs );
+
+struct unexpected : std::exception {};
 void add_leaf_situation( situations& s, const shape g );
 void add_leaf_situations( situations& s, const std::vector<shape> gs );
 

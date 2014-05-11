@@ -4,8 +4,20 @@ void add_blacks( situations&s, const std::vector<shape> gs ) {
 //TODO
 }
 
+/*
+  We assume that no "deduction" has been made already, so any shapes
+  already present in the situations are also leaves.
+*/
 void add_leaf_situation( situations& s, const shape g ) {
-//TODO
+	if( s.s.count(g) == 0 )
+		throw unexpected();
+	if( s.s[g].size() > 0 )
+		return;
+
+	situation x;
+	x.black    = g;
+	x.relevant = g;
+	s.s[g].push_back( x );
 }
 
 void add_leaf_situations( situations& s, const std::vector<shape> gs ) {
