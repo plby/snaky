@@ -64,6 +64,25 @@ inline void verify_in_bounds( const int x, const int y ) {
 		throw out_of_bounds();
 }
 
+/*
+  A hash function to support std::unordered_map.
+
+  Note to self: due to all of the templates, it was pretty hard to get
+  this code to even compile.  And it's trivial code.
+*/
+namespace std {
+	template <> 
+	struct hash<shape>
+	{
+		std::size_t operator() (const shape& s) const {
+			return std::hash<std::bitset<MAX_SQUARES> >()( s.present );
+		}
+	};
+}
+
+/*
+  Basic reflection and rotation.
+*/
 shape reflect_xy( const shape& s );
 shape rotate_xy ( const shape& s );
 

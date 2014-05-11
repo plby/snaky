@@ -5,9 +5,10 @@
   The main structure here keeps track of a *collection* of situations,
   and handles things like organizing them for quick access.
 */
+#include <unordered_map>
 struct situations {
 //TODO
-	
+	std::unordered_map<shape, std::vector<situation> > s;
 };
 
 void add_blacks( situations&s, const std::vector<shape> gs );
