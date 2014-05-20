@@ -4,5 +4,8 @@ FLAGS=-std=c++11 -g
 SRC=$(wildcard src/*.cc)
 HEAD=$(wildcard src/*.hh)
 
-bin/main: $(SRC) $(HEAD)
+bin:
+	mkdir -p bin/
+
+bin/main: bin $(SRC) $(HEAD)
 	g++ $(FLAGS) $(SRC) -o bin/main
